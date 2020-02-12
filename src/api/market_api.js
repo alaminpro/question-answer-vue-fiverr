@@ -1,5 +1,6 @@
 export const market = [
     {
+        id: 1,
         question: 'Market size on which you are positioned',
         answer: [
             {
@@ -21,6 +22,7 @@ export const market = [
         ]
     },
     {
+        id: 2,
         question: 'Your service / product is?',
         answer: [
             {
@@ -38,10 +40,11 @@ export const market = [
         ]
     },
     {
+        id: 3,
         question: 'Do you have proponents competitor services or similar products?',
         answer: [
             {
-                title: 'Yes',
+                title: 'yes',
                 value: 0
             },
             {
@@ -51,6 +54,7 @@ export const market = [
         ],
     },
     {
+        id: 4,
         question: 'the main competitor market share',
         answer: [
             {
@@ -70,9 +74,10 @@ export const market = [
                 value: 0
             },
         ],
-        dependencies: false
+        dependancies: false
     },
     {
+        id: 5,
         question: 'Primary industry',
         answer: [
             {
@@ -130,6 +135,7 @@ export const market = [
         ],
     },
     {
+        id: 6,
         question: 'Secondary Industry',
         answer: [
             {
@@ -412,8 +418,8 @@ export const market = [
                 title: 'All sectors',
                 value: 0
             },
-
         ],
+        multiple: true
     },
 
 ]

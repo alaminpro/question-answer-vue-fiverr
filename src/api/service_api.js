@@ -1,5 +1,6 @@
 export const service = [
     {
+        id: 1,
         question: 'Your company will offer a : ',
         answer: [
             {
@@ -17,6 +18,7 @@ export const service = [
         ]
     },
     {
+        id: 2,
         question: 'Have you filed a patent for your service or product?',
         answer: [
             {
@@ -30,6 +32,7 @@ export const service = [
         ]
     },
     {
+        id: 3,
         question: 'The business model of your service or product, does it offera recurring revenue?',
         answer: [
             {
@@ -43,10 +46,11 @@ export const service = [
         ]
     },
     {
+        id: 4,
         question: 'Do you outsource all or part of the production to a supplier to create / offer your product or service?',
         answer: [
             {
-                title: 'Yes',
+                title: 'yes',
                 value: 0
             },
             {
@@ -56,10 +60,11 @@ export const service = [
         ]
     },
     {
+        id: 5,
         question: 'If yes, do you have multiple suppliers available for your product or service?',
         answer: [
             {
-                title: 'Yes',
+                title: 'yes',
                 value: 300
             },
             {
@@ -67,9 +72,10 @@ export const service = [
                 value: 0
             }
         ],
-        dependencies: false,
+        dependancies: false,
     },
     {
+        id: 6,
         question: 'In what stage is your product or service?',
         answer: [
             {
@@ -83,18 +89,19 @@ export const service = [
         ],
     },
     {
+        id: 7,
         question: 'Do you have for your product / service prototype / MVP?',
         answer: [
             {
-                title: 'Yes',
+                title: 'yes',
                 value: 300
             },
             {
-                title: 'No',
+                title: 'no',
                 value: 0
             }
         ],
-        dependencies: false,
+        dependancies: false,
     },
 
 

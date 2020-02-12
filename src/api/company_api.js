@@ -98,7 +98,8 @@ export const company = [
                 value: ''
             },
 
-        ]
+        ],
+        input: true
     },
     {
         id: 5,

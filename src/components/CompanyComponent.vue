@@ -5,8 +5,10 @@
       v-for="(company, index) in companyActive"
       :key="index"
     >
-      <legend class="col-form-labelpt-0 radio_legend" v-html="company.question"> 
-      </legend>
+      <legend
+        class="col-form-labelpt-0 radio_legend"
+        v-html="company.question"
+      ></legend>
       <div
         class="form-check"
         v-for="(ans, ans_index) in checkAnswerRadio(company.answer)"
@@ -43,14 +45,41 @@
         </select>
       </div>
     </fieldset>
-    <fieldset
-      class="form-group" 
+    <div>
+      <fieldset
+      class="form-group"
+      v-for="(company, index) in companyInput"
+      :key="index"
     >
-      <legend class="col-form-labelpt-0 radio_legend">Country headquarters</legend>
+      <legend
+        class="col-form-labelpt-0 radio_legend"
+        v-html="company.question"
+      ></legend>
+      <div
+        class="form-check"
+        v-for="(ans, ans_index) in company.answer"
+        :key="ans_index"
+      > 
+        <div class="input-group">
+          <label
+          class="form-check-label radio-label"
+          :for="'answer_' + ans_index + '_' + company.id"
+        >
+          {{ ans.title }}
+        </label>
+        <input type="number" class="form-control ml-3 mt-1" id="'answer_' + ans_index + '_' + company.id">
+        </div>
+      </div>
+    </fieldset>
+    </div>
+    <fieldset class="form-group">
+      <legend class="col-form-labelpt-0 radio_legend">
+        Country headquarters
+      </legend>
       <div class="form-check">
-       <Select2 v-model="country" :options="allCountry" />
-       </div>
-   </fieldset>
+        <Select2 v-model="country" :options="allCountry" />
+      </div>
+    </fieldset>
     <div class="next_section mt-5">
       <button
         type="button"
@@ -65,27 +94,32 @@
 </template>
 
 <script>
-import { company } from "../api/company_api"; 
-import Select2 from 'v-select2-component';
-import {country} from '../api/country';
+import { company } from "../api/company_api";
+import Select2 from "v-select2-component";
+import { country } from "../api/country";
 export default {
   name: "companyComponent",
-   components: {
-     Select2 
+  components: {
+    Select2
   },
   data() {
     return {
       company: company,
       companyBool: true,
       companySelected: [],
-       allCountry: [] ,
-      country: ''
+      allCountry: [],
+      country: ""
     };
   },
   computed: {
     companyActive: function() {
       return this.company.filter(function(val) {
-        return val.dependancies !== false;
+        return val.dependancies !== false && val.input !== true;
+      });
+    },
+    companyInput: function() {
+      return this.company.filter(function(val) {
+        return  val.input === true;
       });
     },
     companyWatch: function() {
@@ -125,13 +159,20 @@ export default {
       const companyMap = this.companySelected
         .filter(el => el != null)
         .map(val => Number(val.split("_")[0]));
-      this.$emit("companyNext", companyMap);
+
+      let companyMax = this.company.filter(d => d.dependancies !== false)
+        .map(val => Math.max(...val.answer.map(v => v.value)))
+        .reduce((a, b) => a + b);
+      let companyMin = this.company.filter(d => d.dependancies !== false)
+        .map(val => Math.min(...val.answer.map(v => v.value)))
+        .reduce((a, b) => a + b);
+
+      this.$emit("companyNext", { companyMap, companyMax, companyMin });
     }
   },
   created() {
     const countries = country.map(val => val.name);
-    this.allCountry = countries
-    
+    this.allCountry = countries;
   }
 };
 </script>
