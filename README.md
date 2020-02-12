@@ -1,4 +1,4 @@
-# practice
+# Question and Answer System
 
 ## Project setup
 ```
