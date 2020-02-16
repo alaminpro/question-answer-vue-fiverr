@@ -12,7 +12,7 @@
       ></Progress>
     </div>
     <div class="report__generate_time text-center my-5">
-      Report Generated: <span class="font-weight-bold">7 Febr</span>
+      Report Generated: <span class="font-weight-bold" v-html="DateTime"></span>
     </div>
     <div class="row">
       <div class="col-lg-10 offset-lg-1">
@@ -78,8 +78,8 @@
     </div>
     <div class="contact__us text-center mt-5">
       <button class="btn btn-success" v-b-modal="'my-modal'">Contact Us</button>
-      <b-modal hide-footer  size="lg"  id="my-modal">
-           <ContactUs  />
+      <b-modal hide-footer size="lg" id="my-modal">
+        <ContactUs />
       </b-modal>
     </div>
   </div>
@@ -97,10 +97,16 @@ export default {
   data() {
     return {};
   },
-  computed: {},
-
-  methods: {},
-  created() {}
+  computed: {
+    DateTime() {
+      return new Date().toLocaleString("en-us", {
+        day: "numeric",
+        month: "long",
+        hour: "numeric",
+        minute: "numeric"
+      });
+    }
+  }
 };
 </script>
 <style lang="css" scoped>
