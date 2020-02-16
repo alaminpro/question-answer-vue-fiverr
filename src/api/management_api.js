@@ -1,5 +1,6 @@
 export const management = [
     {
+        id: 1,
         question: 'Number of founders',
         answer: [
             {
@@ -25,6 +26,7 @@ export const management = [
         ]
     },
     {
+        id: 2,
         question: 'Number of cumulative years of experience of the management team',
         answer: [
             {
@@ -46,6 +48,7 @@ export const management = [
         ]
     },
     {
+        id: 3,
         question: 'One person from the management team t it already created a company previously?',
         answer: [
             {
@@ -59,6 +62,7 @@ export const management = [
         ]
     },
     {
+        id: 4,
         question: 'Distribution of the company\'s capital of major shareholders(in%) ',
         answer: [
             {
@@ -74,10 +78,11 @@ export const management = [
                 value: ''
             },
         ],
-        data_entry: true
+        input: true
     },
 
     {
+        id: 5,
         question: 'Is there a majority shareholder parmit the founding team?',
         answer: [
             {
@@ -91,6 +96,7 @@ export const management = [
         ]
     },
     {
+        id: 6,
         question: 'Do you have experts / advisors within the board?',
         answer: [
             {

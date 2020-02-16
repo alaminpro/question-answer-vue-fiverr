@@ -46,31 +46,7 @@
       </div>
     </fieldset>
     <div>
-      <fieldset
-      class="form-group"
-      v-for="(service, index) in serviceInput"
-      :key="index"
-    >
-      <legend
-        class="col-form-labelpt-0 radio_legend"
-        v-html="service.question"
-      ></legend>
-      <div
-        class="form-check"
-        v-for="(ans, ans_index) in service.answer"
-        :key="ans_index"
-      > 
-        <div class="input-group">
-          <label
-          class="form-check-label radio-label"
-          :for="'answer_' + ans_index + '_' + service.id"
-        >
-          {{ ans.title }}
-        </label>
-        <input type="number" class="form-control ml-3 mt-1" id="'answer_' + ans_index + '_' + service.id">
-        </div>
-      </div>
-    </fieldset>
+     
     </div> 
     <div class="next_section mt-5">
       <button
@@ -99,14 +75,9 @@ export default {
   computed: {
     serviceActive: function() {
       return this.service.filter(function(val) {
-        return val.dependancies !== false && val.input !== true;
+        return val.dependancies !== false && val.input !== true && val.dependbeing !== false;
       });
-    },
-    serviceInput: function() {
-      return this.service.filter(function(val) {
-        return  val.input === true;
-      });
-    },
+    }, 
     serviceWatch: function() {
       return this.serviceSelected;
     },
@@ -121,13 +92,16 @@ export default {
     serviceWatch(newVal) {
       let filterVal = newVal
         .map(val => val.split("_").filter(e => (e === "yes" ? e : "")))
-        .some(a => (a.length > 0 ? a : ""));
+        .some(a => (a.length > 0 ? a : "")); 
+      let filterbeing = newVal
+        .map(val => val.split("_")
+        .filter(e => ( e === "being built" ? e : "")))
+        .some(a => (a.length > 0 ? a : "")); 
       this.senitizeData(filterVal);
+      this.senitizeDataBeing(filterbeing);
       if (this.serviceSelected.length > 0) {
         this.serviceBool = false;
-      }
-
-      // window.console.log(serviceMap)
+      }  
     }
   },
   methods: {
@@ -140,20 +114,29 @@ export default {
             a.dependancies === true ? (a.dependancies = false) : ""
           );
     },
+    senitizeDataBeing(val) {
+      val
+        ? this.service.map(a =>
+            a.dependbeing === false ? (a.dependbeing = true) : ""
+          )
+        : this.service.map(a =>
+            a.dependbeing === true ? (a.dependbeing = false) : ""
+          );
+    },
     Next() {
       const serviceMap = this.serviceSelected
         .filter(el => el != null)
         .map(val => Number(val.split("_")[0]));
 
-      let serviceMax = this.service.filter(d => d.dependancies !== false)
+      let serviceMax = this.service.filter(d => d.dependancies !== false || d.dependbeing !== false)
         .map(val => Math.max(...val.answer.map(v => v.value)))
         .reduce((a, b) => a + b);
-      let serviceMin = this.service.filter(d => d.dependancies !== false)
+      let serviceMin = this.service.filter(d => d.dependancies !== false || d.dependbeing !== false)
         .map(val => Math.min(...val.answer.map(v => v.value)))
         .reduce((a, b) => a + b);
 
       this.$emit("serviceNext", { serviceMap, serviceMax, serviceMin });
     }
-  }, 
+  },  
 };
 </script>

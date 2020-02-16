@@ -14,7 +14,7 @@
             <MarketComponent v-if="market" @marketNext="marketNext" />
             <ServiceComponent v-if="service" @serviceNext="serviceNext"/> 
             <ManagementComponent v-if="management" @managementNext="managementNext"/>
-            <EndComponent v-if="end"  @endNext="endNext"/>
+            <EndComponent v-if="end"/>
           </div>
         </div>
       </div>
@@ -42,12 +42,12 @@ export default {
   },
   data() {
     return {
-      fundraising: true,
+      fundraising: false,
       company: false,
       market: false, 
       service: false, 
       management: false, 
-      end: false, 
+      end: true, 
       data: {
         fundraising: {
           fundSelected: [], 
@@ -112,7 +112,9 @@ export default {
       this.end =  false 
    },
    serviceNext(serviceVal){
-      this.data.service.serviceSelected = serviceVal;
+      this.data.service.serviceSelected = serviceVal.serviceMap;
+      this.data.service.max_point = serviceVal.serviceMax;
+      this.data.service.min_point = serviceVal.serviceMin;
       this.fundraising = false
       this.company =false
       this.market =false
@@ -121,7 +123,9 @@ export default {
       this.end =  false
    },
    managementNext(managementVal){
-      this.data.management.managementSelected = managementVal;
+      this.data.management.managementSelected = managementVal.managementMap;
+      this.data.management.max_point = managementVal.managementMax;
+      this.data.management.min_point = managementVal.managementMin;
       this.fundraising = false
       this.company =false
       this.market =false

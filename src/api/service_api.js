@@ -79,7 +79,7 @@ export const service = [
         question: 'In what stage is your product or service?',
         answer: [
             {
-                title: 'Being built',
+                title: 'being built',
                 value: 60
             },
             {
@@ -93,7 +93,7 @@ export const service = [
         question: 'Do you have for your product / service prototype / MVP?',
         answer: [
             {
-                title: 'yes',
+                title: 'Yes',
                 value: 300
             },
             {
@@ -101,7 +101,7 @@ export const service = [
                 value: 0
             }
         ],
-        dependancies: false,
+        dependbeing: false,
     },
 
 
