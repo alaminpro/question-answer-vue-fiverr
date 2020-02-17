@@ -1,14 +1,7 @@
 <template>
   <div>
-    <fieldset
-      class="form-group"
-      v-for="(company, index) in companyActive"
-      :key="index"
-    >
-      <legend
-        class="col-form-labelpt-0 radio_legend"
-        v-html="company.question"
-      ></legend>
+    <fieldset class="form-group" v-for="(company, index) in companyActive" :key="index">
+      <legend class="col-form-labelpt-0 radio_legend" v-html="company.question"></legend>
       <div
         class="form-check"
         v-for="(ans, ans_index) in checkAnswerRadio(company.answer)"
@@ -25,9 +18,7 @@
         <label
           class="form-check-label radio-label"
           :for="'answer_' + ans_index + '_' + company.id"
-        >
-          {{ ans.title }}
-        </label>
+        >{{ ans.title }}</label>
       </div>
       <div class="form-check" v-if="checkAnswerSelect(company.answer)">
         <select
@@ -39,56 +30,36 @@
             v-for="(ans, ans_index) in checkAnswerSelect(company.answer)"
             :key="ans_index"
             :value="ans.value + '_' + ans.title"
-          >
-            {{ ans.title }}</option
-          >
+          >{{ ans.title }}</option>
         </select>
       </div>
     </fieldset>
     <div>
-      <fieldset
-      class="form-group"
-      v-for="(company, index) in companyInput"
-      :key="index"
-    >
-      <legend
-        class="col-form-labelpt-0 radio_legend"
-        v-html="company.question"
-      ></legend>
-      <div
-        class="form-check"
-        v-for="(ans, ans_index) in company.answer"
-        :key="ans_index"
-      > 
-        <div class="input-group">
-          <label
-          class="form-check-label radio-label"
-          :for="'answer_' + ans_index + '_' + company.id"
-        >
-          {{ ans.title }}
-        </label>
-        <input type="number" class="form-control ml-3 mt-1" id="'answer_' + ans_index + '_' + company.id">
+      <fieldset class="form-group" v-for="(company, index) in companyInput" :key="index">
+        <legend class="col-form-labelpt-0 radio_legend" v-html="company.question"></legend>
+        <div class="form-check" v-for="(ans, ans_index) in company.answer" :key="ans_index">
+          <div class="input-group">
+            <label
+              class="form-check-label radio-label"
+              :for="'answer_' + ans_index + '_' + company.id"
+            >{{ ans.title }}</label>
+            <input
+              type="number"
+              class="form-control ml-3 mt-1"
+              id="'answer_' + ans_index + '_' + company.id"
+            />
+          </div>
         </div>
-      </div>
-    </fieldset>
+      </fieldset>
     </div>
     <fieldset class="form-group">
-      <legend class="col-form-labelpt-0 radio_legend">
-        Country headquarters
-      </legend>
+      <legend class="col-form-labelpt-0 radio_legend">Country headquarters</legend>
       <div class="form-check">
         <Select2 v-model="country" :options="allCountry" />
       </div>
     </fieldset>
     <div class="next_section mt-5">
-      <button
-        type="button"
-        :disabled="companyBool"
-        class="btn btn-success"
-        @click="Next"
-      >
-        Next
-      </button>
+      <button type="button" :disabled="companyBool" class="btn btn-success" @click="Next">Next</button>
     </div>
   </div>
 </template>
@@ -119,7 +90,7 @@ export default {
     },
     companyInput: function() {
       return this.company.filter(function(val) {
-        return  val.input === true;
+        return val.input === true;
       });
     },
     companyWatch: function() {
@@ -160,13 +131,17 @@ export default {
         .filter(el => el != null)
         .map(val => Number(val.split("_")[0]));
 
-      let companyMax = this.company.filter(d => d.dependancies !== false)
+      let companyMax = this.company
+        .filter(d => d.dependancies !== false)
+        .filter(d => d.answer.length > 0)
         .map(val => Math.max(...val.answer.map(v => v.value)))
         .reduce((a, b) => a + b);
-      let companyMin = this.company.filter(d => d.dependancies !== false)
+
+      let companyMin = this.company
+        .filter(d => d.dependancies !== false)
+        .filter(d => d.answer.length > 0)
         .map(val => Math.min(...val.answer.map(v => v.value)))
         .reduce((a, b) => a + b);
-
       this.$emit("companyNext", { companyMap, companyMax, companyMin });
     }
   },
