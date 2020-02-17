@@ -117,7 +117,7 @@ export const company = [
     },
     {
         id: 9,
-        question: '<a href="https://www.investopedia.com/terms/o/operatingmargin.asp" target="_blank">More Information</a>',
+        question: '<a href="https://www.investopedia.com/terms/o/operatingmargin.asp" target="_blank" class="info_style"><i class="fa fa-info"></i></a>',
         answer: [],
         dependancies: false,
     },

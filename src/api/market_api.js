@@ -136,7 +136,7 @@ export const market = [
     },
     {
         id: 6,
-        question: 'Secondary Industry',
+        question: 'Secondary Industry (Multiple Choice)',
         answer: [
             {
                 title: 'Aerospace and Defense',

@@ -99,9 +99,10 @@ export default {
         .some(a => (a.length > 0 ? a : "")); 
       this.senitizeData(filterVal);
       this.senitizeDataBeing(filterbeing);
-      if (this.serviceSelected.length > 0) {
+       const fund = this.serviceSelected.filter(item => item !== undefined && item !== null)
+      if (fund.length >= 5) {
         this.serviceBool = false;
-      }  
+      }
     }
   },
   methods: {

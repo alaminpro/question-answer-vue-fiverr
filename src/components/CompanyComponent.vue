@@ -36,7 +36,7 @@
     </fieldset>
     <div>
       <fieldset class="form-group" v-for="(company, index) in companyInput" :key="index">
-        <legend class="col-form-labelpt-0 radio_legend" v-html="company.question"></legend>
+        <legend class="col-form-label pt-0 radio_legend" v-html="company.question"></legend>
         <div class="form-check" v-for="(ans, ans_index) in company.answer" :key="ans_index">
           <div class="input-group">
             <label
@@ -53,7 +53,7 @@
       </fieldset>
     </div>
     <fieldset class="form-group">
-      <legend class="col-form-labelpt-0 radio_legend">Country headquarters</legend>
+      <legend class="col-form-label pt-0 m-0 radio_legend">Country headquarters</legend>
       <div class="form-check">
         <Select2 v-model="country" :options="allCountry" />
       </div>
@@ -109,7 +109,8 @@ export default {
         .map(val => val.split("_").filter(e => (e === "yes" ? e : "")))
         .some(a => (a.length > 0 ? a : ""));
       this.senitizeData(filterVal);
-      if (this.companySelected.length > 0) {
+       const fund = this.companySelected.filter(item => item !== undefined && item !== null)
+      if (fund.length >= 7) {
         this.companyBool = false;
       }
 
@@ -151,3 +152,27 @@ export default {
   }
 };
 </script>
+<style>
+  .info_style{
+    width: 35px;
+    height: 35px;
+    background: rgb(33, 146, 25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+        position: absolute;
+    top: -106px;
+    left: 476px;
+  }
+  .info_style i{
+    color: #fff;
+    
+  }
+  .radio_legend{
+    position: relative;
+  }
+  .info_style i:hover{
+   text-decoration: none;
+  }
+</style>

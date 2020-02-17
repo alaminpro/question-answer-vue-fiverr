@@ -7,9 +7,10 @@
             <h2 class="text-center py-3" v-if="fundraising || company">Fundraising & Company</h2>
             <h2 class="text-center py-3" v-if="market">Market</h2>
             <h2 class="text-center py-3" v-if="service">Product / Service</h2>
+            <h2 class="text-center py-3" v-if="management">Management</h2>
           </div>
           <div class="card-body">
-            <FundraisingComponent v-if="fundraising" @fundraisingNext="fundraisingNext" />
+            <FundraisingComponent v-if="fundraising" @fundraisingNext="fundraisingNext"  />
             <CompanyComponent v-if="company" @companyNext="companyNext" />
             <MarketComponent v-if="market" @marketNext="marketNext" />
             <ServiceComponent v-if="service" @serviceNext="serviceNext" />

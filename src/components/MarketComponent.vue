@@ -105,7 +105,8 @@ export default {
         .map(val => val.split("_").filter(e => (e === "yes" ? e : "")))
         .some(a => (a.length > 0 ? a : ""));
       this.senitizeData(filterVal);
-      if (this.marketSelected.length > 0) {
+       const fund = this.marketSelected.filter(item => item !== undefined && item !== null)
+      if (fund.length >= 4) {
         this.marketBool = false;
       }
     }

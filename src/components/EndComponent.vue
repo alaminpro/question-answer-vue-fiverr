@@ -59,6 +59,7 @@
     </div>
     <div class="contact__us text-center mt-5">
       <button class="btn btn-success" v-b-modal="'my-modal'">Contact Us</button>
+      <button class="btn btn-secondary ml-2" @click="goBack">Go Back</button>
       <b-modal hide-footer size="lg" id="my-modal">
         <ContactUs />
       </b-modal>
@@ -82,6 +83,11 @@ export default {
   computed: {
     Datetime(){
       return new Date().toLocaleString("en-us", {day: "numeric", month: "short", year: "numeric", hour: 'numeric'})
+    }
+  },
+  methods: {
+    goBack(){
+      window.location.href  = '/'
     }
   }
 };
