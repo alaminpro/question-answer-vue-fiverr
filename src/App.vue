@@ -283,7 +283,7 @@ export default {
       }
     },
     overallrating() {
-      // total max points
+      // // total max points
       // const fundCompanyMax =
       //   this.data.fundraising.max_point + this.data.company.max_point;
       // const marketMax = this.data.market.max_point;
@@ -302,25 +302,26 @@ export default {
       //   ...[fundCompanyMin, marketMin, serviceMin, managementMin]
       // );
       // const overallRating = parseInt((totalMax - totalMin) / 6);
-      // var totalfund = this.data.fundraising.fundSelected
-      //   .filter(i => i != undefined)
-      //   .reduce((a, b) => a + b, 0);
-      // var totalCompany = this.data.company.companySelected
-      //   .filter(i => i != undefined)
-      //   .reduce((a, b) => a + b, 0);
-      // var company = totalfund + totalCompany;
-      // var market = this.data.market.marketSelected
-      //   .filter(i => i != undefined)
-      //   .reduce((a, b) => a + b, 0);
-      // var service = this.data.service.serviceSelected
-      //   .filter(i => i != undefined)
-      //   .reduce((a, b) => a + b, 0);
-      // var management = this.data.management.managementSelected
-      //   .filter(i => i != undefined)
-      //   .reduce((a, b) => a + b, 0);
 
-      var total = [this.overall.fundcompany, this.overall.market, this.overall.service, this.overall.management];
-      var overallRating = total.reduce((a, b) => a + b, 0); 
+      var totalfund = this.data.fundraising.fundSelected
+        .filter(i => i != undefined)
+        .reduce((a, b) => a + b, 0);
+      var totalCompany = this.data.company.companySelected
+        .filter(i => i != undefined)
+        .reduce((a, b) => a + b, 0);
+      var company = totalfund + totalCompany;
+      var market = this.data.market.marketSelected
+        .filter(i => i != undefined)
+        .reduce((a, b) => a + b, 0);
+      var service = this.data.service.serviceSelected
+        .filter(i => i != undefined)
+        .reduce((a, b) => a + b, 0);
+      var management = this.data.management.managementSelected
+        .filter(i => i != undefined)
+        .reduce((a, b) => a + b, 0);
+
+      var total = [company, market, service,management];
+      var overallRating = total.reduce((a, b) => a + b, 0);
       this.rating.overallRating = this.OverallRating(overallRating);
 
       if (this.rating.overallRating == "A+") {
@@ -349,12 +350,12 @@ export default {
       else if (val < 115) return "F";
     },
     OverallRating(val) {
-      if (val <= 853) return "C";
-      else if (val >= 854 && val <= 1412) return "C+";
-      else if (val >= 1413 && val <= 1971) return "B";
-      else if (val >= 1972 && val <= 2530) return "B+";
-      else if (val >= 2531 && val <= 3089) return "A";
-      else if (val >= 3090) return "A+";
+      if (val <= 1909) return "C";
+      else if (val >= 1910 && val <= 3108) return "C+";
+      else if (val >= 3109 && val <= 4307) return "B";
+      else if (val >= 4308 && val <= 5506) return "B+";
+      else if (val >= 5507 && val <= 6705) return "A";
+      else if (val >= 6706) return "A+";
     }
   }
 };

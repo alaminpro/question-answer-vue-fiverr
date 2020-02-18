@@ -110,7 +110,7 @@ export default {
         .some(a => (a.length > 0 ? a : ""));
       this.senitizeData(filterVal);
        const fund = this.companySelected.filter(item => item !== undefined && item !== null)
-      if (fund.length >= 7) {
+      if (fund.length >= 9) {
         this.companyBool = false;
       }
 

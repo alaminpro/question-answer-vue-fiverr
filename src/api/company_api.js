@@ -244,5 +244,97 @@ export const company = [
             },
         ]
     },
+    {
+        id: 9,
+        question: 'Operating margin forecast in 3 year',
+        answer: [
+            {
+                title: 'Lower then - 25%',
+                value: 0
+            },
+            {
+                title: 'Between -16% and -25%',
+                value: 30
+            },
+            {
+                title: 'Between -11% and - 15%',
+                value: 60
+            },
+            {
+                title: 'Between -6% to - 10%',
+                value: 90
+            },
+            {
+                title: 'Between - 5% and 0%',
+                value: 120
+            },
+            {
+                title: 'Between 0% and 5%',
+                value: 150
+            },
+            {
+                title: 'Between 6% and 10%',
+                value: 180
+            },
+            {
+                title: 'Between 11% and 15%',
+                value: 240
+            },
+            {
+                title: 'Between 16% and 25%',
+                value: 270
+            },
+            {
+                title: 'Higher then 25%',
+                value: 300
+            },
+        ]
+    },
+    {
+        id: 10,
+        question: 'Operating margin forecast in 5 years',
+        answer: [
+            {
+                title: 'Lower then - 25%',
+                value: 0
+            },
+            {
+                title: 'Between -16% and -25%',
+                value: 30
+            },
+            {
+                title: 'Between -11% and - 15%',
+                value: 60
+            },
+            {
+                title: 'Between -6% to - 10%',
+                value: 90
+            },
+            {
+                title: 'Between - 5% and 0%',
+                value: 120
+            },
+            {
+                title: 'Between 0% and 5%',
+                value: 150
+            },
+            {
+                title: 'Between 6% and 10%',
+                value: 180
+            },
+            {
+                title: 'Between 11% and 15%',
+                value: 240
+            },
+            {
+                title: 'Between 16% and 25%',
+                value: 270
+            },
+            {
+                title: 'Higher then 25%',
+                value: 300
+            },
+        ]
+    },
 
 ]
