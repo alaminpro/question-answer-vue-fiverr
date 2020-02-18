@@ -72,10 +72,7 @@ import Progress from "easy-circular-progress";
 import ContactUs from "./ContactComponent";
 export default {
   name: "EndComponent",
-  props: {
-    rating: Object,
-    allval: Object
-  },
+  props:['rating', 'allval'],
   components: {
     Progress,
     ContactUs

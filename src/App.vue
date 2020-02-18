@@ -4,17 +4,25 @@
       <div class="col-lg-12">
         <div class="card">
           <div class="card-title">
-            <h2 class="text-center py-3" v-if="fundraising || company">Fundraising & Company</h2>
+            <h2 class="text-center py-3" v-if="fundraising || company">
+              Fundraising & Company
+            </h2>
             <h2 class="text-center py-3" v-if="market">Market</h2>
             <h2 class="text-center py-3" v-if="service">Product / Service</h2>
             <h2 class="text-center py-3" v-if="management">Management</h2>
           </div>
           <div class="card-body">
-            <FundraisingComponent v-if="fundraising" @fundraisingNext="fundraisingNext"  />
+            <FundraisingComponent
+              v-if="fundraising"
+              @fundraisingNext="fundraisingNext"
+            />
             <CompanyComponent v-if="company" @companyNext="companyNext" />
             <MarketComponent v-if="market" @marketNext="marketNext" />
             <ServiceComponent v-if="service" @serviceNext="serviceNext" />
-            <ManagementComponent v-if="management" @managementNext="managementNext" />
+            <ManagementComponent
+              v-if="management"
+              @managementNext="managementNext"
+            />
             <EndComponent v-if="end" :rating="rating" :allval="allVal" />
           </div>
         </div>
@@ -89,6 +97,12 @@ export default {
         marketRating: null,
         serviceRating: null,
         managementRating: null
+      },
+      overall: {
+        fundcompany: null,
+        market: null,
+        service: null,
+        management: null,
       }
     };
   },
@@ -159,68 +173,188 @@ export default {
         this.data.fundraising.max_point + this.data.company.max_point;
       const fundCompanyMin =
         this.data.fundraising.min_point + this.data.company.min_point;
-      const fundCompanyRating = parseInt((fundCompanyMax - fundCompanyMin) / 6);
+      this.overall.fundcompany = parseInt((fundCompanyMax - fundCompanyMin) / 6);
 
-      this.allVal.fundCompanyRating = fundCompanyRating / 10;
-      this.rating.fundCompanyRating = this.Rating(fundCompanyRating);
+      var totalfund = this.data.fundraising.fundSelected
+        .filter(i => i != undefined)
+        .reduce((a, b) => a + b, 0);
+
+      var totalCompany = this.data.company.companySelected
+        .filter(i => i != undefined)
+        .reduce((a, b) => a + b, 0);
+
+      var totalSum = totalfund + totalCompany;
+      this.rating.fundCompanyRating = this.Rating(totalSum);
+
+      if (this.rating.fundCompanyRating == "A+") {
+        this.allVal.fundCompanyRating = 100;
+      } else if (this.rating.fundCompanyRating == "A") {
+        this.allVal.fundCompanyRating = 83;
+      } else if (this.rating.fundCompanyRating == "B+") {
+        this.allVal.fundCompanyRating = 66.4;
+      } else if (this.rating.fundCompanyRating == "B") {
+        this.allVal.fundCompanyRating = 49.8;
+      } else if (this.rating.fundCompanyRating == "C+") {
+        this.allVal.fundCompanyRating = 33.2;
+      } else if (this.rating.fundCompanyRating == "C") {
+        this.allVal.fundCompanyRating = 16.6;
+      } else if (this.rating.fundCompanyRating == "F") {
+        this.allVal.fundCompanyRating = 0;
+      }
     },
     // Market rating
     marketrating() {
-      const marketRating = parseInt(
+      this.overall.market = parseInt(
         (this.data.market.max_point - this.data.market.min_point) / 6
       );
-      this.allVal.marketRating = marketRating / 10;
-      this.rating.marketRating = this.Rating(marketRating);
+      var totalSum = this.data.market.marketSelected
+        .filter(i => i != undefined)
+        .reduce((a, b) => a + b, 0);
+
+      this.rating.marketRating = this.Rating(totalSum);
+
+      if (this.rating.marketRating == "A+") {
+        this.allVal.marketRating = 100;
+      } else if (this.rating.marketRating == "A") {
+        this.allVal.marketRating = 83;
+      } else if (this.rating.marketRating == "B+") {
+        this.allVal.marketRating = 66.4;
+      } else if (this.rating.marketRating == "B") {
+        this.allVal.marketRating = 49.8;
+      } else if (this.rating.marketRating == "C+") {
+        this.allVal.marketRating = 33.2;
+      } else if (this.rating.marketRating == "C") {
+        this.allVal.marketRating = 16.6;
+      } else if (this.rating.marketRating == "F") {
+        this.allVal.marketRating = 0;
+      }
     },
     // service rating
     servicerating() {
-      const serviceRating = parseInt(
+    this.overall.service = parseInt(
         (this.data.service.max_point - this.data.service.min_point) / 6
       );
-      this.allVal.serviceRating = serviceRating / 10;
-      this.rating.serviceRating = this.Rating(serviceRating);
+      var totalSum = this.data.service.serviceSelected
+        .filter(i => i != undefined)
+        .reduce((a, b) => a + b, 0);
+
+      this.rating.serviceRating = this.Rating(totalSum);
+      if (this.rating.serviceRating == "A+") {
+        this.allVal.serviceRating = 100;
+      } else if (this.rating.serviceRating == "A") {
+        this.allVal.serviceRating = 83;
+      } else if (this.rating.serviceRating == "B+") {
+        this.allVal.serviceRating = 66.4;
+      } else if (this.rating.serviceRating == "B") {
+        this.allVal.serviceRating = 49.8;
+      } else if (this.rating.serviceRating == "C+") {
+        this.allVal.serviceRating = 33.2;
+      } else if (this.rating.serviceRating == "C") {
+        this.allVal.serviceRating = 16.6;
+      } else if (this.rating.serviceRating == "F") {
+        this.allVal.serviceRating = 0;
+      }
     },
     // management rating
     managementrating() {
-      const managementRating = parseInt(
+      this.overall.management = parseInt(
         (this.data.management.max_point - this.data.management.min_point) / 6
       );
-      this.allVal.managementRating = managementRating / 10;
-      this.rating.managementRating = this.Rating(managementRating);
+      var totalSum = this.data.management.managementSelected
+        .filter(i => i != undefined)
+        .reduce((a, b) => a + b, 0);
+
+      this.rating.managementRating = this.Rating(totalSum);
+
+      if (this.rating.managementRating == "A+") {
+        this.allVal.managementRating = 100;
+      } else if (this.rating.managementRating == "A") {
+        this.allVal.managementRating = 83;
+      } else if (this.rating.managementRating == "B+") {
+        this.allVal.managementRating = 66.4;
+      } else if (this.rating.managementRating == "B") {
+        this.allVal.managementRating = 49.8;
+      } else if (this.rating.managementRating == "C+") {
+        this.allVal.managementRating = 33.2;
+      } else if (this.rating.managementRating == "C") {
+        this.allVal.managementRating = 16.6;
+      } else if (this.rating.managementRating == "F") {
+        this.allVal.managementRating = 0;
+      }
     },
     overallrating() {
       // total max points
-      const fundCompanyMax =
-        this.data.fundraising.max_point + this.data.company.max_point;
-      const marketMax = this.data.market.max_point;
-      const serviceMax = this.data.service.max_point;
-      const managementMax = this.data.management.max_point;
-      const totalMax = Math.max(
-        ...[fundCompanyMax, marketMax, serviceMax, managementMax]
-      );
-      // total min points
-      const fundCompanyMin =
-        this.data.fundraising.min_point + this.data.company.min_point;
-      const marketMin = this.data.market.min_point;
-      const serviceMin = this.data.service.min_point;
-      const managementMin = this.data.management.min_point;
-      const totalMin = Math.min(
-        ...[fundCompanyMin, marketMin, serviceMin, managementMin]
-      );
+      // const fundCompanyMax =
+      //   this.data.fundraising.max_point + this.data.company.max_point;
+      // const marketMax = this.data.market.max_point;
+      // const serviceMax = this.data.service.max_point;
+      // const managementMax = this.data.management.max_point;
+      // const totalMax = Math.max(
+      //   ...[fundCompanyMax, marketMax, serviceMax, managementMax]
+      // );
+      // // total min points
+      // const fundCompanyMin =
+      //   this.data.fundraising.min_point + this.data.company.min_point;
+      // const marketMin = this.data.market.min_point;
+      // const serviceMin = this.data.service.min_point;
+      // const managementMin = this.data.management.min_point;
+      // const totalMin = Math.min(
+      //   ...[fundCompanyMin, marketMin, serviceMin, managementMin]
+      // );
+      // const overallRating = parseInt((totalMax - totalMin) / 6);
+      // var totalfund = this.data.fundraising.fundSelected
+      //   .filter(i => i != undefined)
+      //   .reduce((a, b) => a + b, 0);
+      // var totalCompany = this.data.company.companySelected
+      //   .filter(i => i != undefined)
+      //   .reduce((a, b) => a + b, 0);
+      // var company = totalfund + totalCompany;
+      // var market = this.data.market.marketSelected
+      //   .filter(i => i != undefined)
+      //   .reduce((a, b) => a + b, 0);
+      // var service = this.data.service.serviceSelected
+      //   .filter(i => i != undefined)
+      //   .reduce((a, b) => a + b, 0);
+      // var management = this.data.management.managementSelected
+      //   .filter(i => i != undefined)
+      //   .reduce((a, b) => a + b, 0);
 
-      const overallRating = parseInt((totalMax - totalMin) / 6);
+      var total = [this.overall.fundcompany, this.overall.market, this.overall.service, this.overall.management];
+      var overallRating = total.reduce((a, b) => a + b, 0); 
+      this.rating.overallRating = this.OverallRating(overallRating);
 
-      this.allVal.overallRating = overallRating / 10;
-      this.rating.overallRating = this.Rating(overallRating);
+      if (this.rating.overallRating == "A+") {
+        this.allVal.overallRating = 100;
+      } else if (this.rating.overallRating == "A") {
+        this.allVal.overallRating = 83;
+      } else if (this.rating.overallRating == "B+") {
+        this.allVal.overallRating = 66.4;
+      } else if (this.rating.overallRating == "B") {
+        this.allVal.overallRating = 49.8;
+      } else if (this.rating.overallRating == "C+") {
+        this.allVal.overallRating = 33.2;
+      } else if (this.rating.overallRating == "C") {
+        this.allVal.overallRating = 16.6;
+      } else if (this.rating.overallRating == "F") {
+        this.allVal.overallRating = 0;
+      }
     },
     Rating(val) {
-      if (val >= 200 && val <= 333) return "C";
-      else if (val >= 334 && val <= 466) return "C+";
-      else if (val >= 467 && val <= 599) return "B";
-      else if (val >= 600 && val <= 732) return "B+";
-      else if (val >= 733 && val <= 865) return "A";
-      else if (val >= 866) return "A+";
-      else if (val < 200) return "F";
+      if (val <= 346) return "C";
+      else if (val >= 347 && val <= 576) return "C+";
+      else if (val >= 577 && val <= 806) return "B";
+      else if (val >= 807 && val <= 1036) return "B+";
+      else if (val >= 1037 && val <= 1266) return "A";
+      else if (val >= 1267) return "A+";
+      else if (val < 115) return "F";
+    },
+    OverallRating(val) {
+      if (val <= 853) return "C";
+      else if (val >= 854 && val <= 1412) return "C+";
+      else if (val >= 1413 && val <= 1971) return "B";
+      else if (val >= 1972 && val <= 2530) return "B+";
+      else if (val >= 2531 && val <= 3089) return "A";
+      else if (val >= 3090) return "A+";
     }
   }
 };
