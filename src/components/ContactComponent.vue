@@ -108,7 +108,7 @@
       <!-- /form-group -->
       <div class="d-flex justify-content-between align-items-center">
         <div class="d-flex">
-          <button type="submit" class="btn btn-primary" v-if="!success && !error">
+          <button type="submit" class="btn btn-custom-bg" v-if="!success && !error">
             Send message
             <img
               v-if="loader"

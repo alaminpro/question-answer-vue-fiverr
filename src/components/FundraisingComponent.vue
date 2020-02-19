@@ -52,7 +52,7 @@
         </fieldset>
 
         <div class="next_section">
-          <button type="submit" class="btn btn-success">Next</button>
+          <button type="submit" class="btn btn-custom-bg">Next</button>
         </div>
       </ValidationObserver>
     </form>

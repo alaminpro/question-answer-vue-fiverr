@@ -75,7 +75,7 @@
           </div>
         </fieldset>
         <div class="next_section mt-5">
-          <button type="submit" class="btn btn-success">Next</button>
+          <button type="submit" class="btn btn-custom-bg">Next</button>
         </div>
       </ValidationObserver>
     </form>
