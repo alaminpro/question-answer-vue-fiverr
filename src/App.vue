@@ -4,8 +4,11 @@
       <div class="col-lg-12">
         <div class="card">
           <div class="card-title">
-            <h2 class="text-center py-3" v-if="fundraising || company">
-              Fundraising & Company
+            <h2 class="text-center py-3" v-if="fundraising">
+              Fundraising
+            </h2>
+            <h2 class="text-center py-3" v-if="company">
+              Company
             </h2>
             <h2 class="text-center py-3" v-if="market">Market</h2>
             <h2 class="text-center py-3" v-if="service">Product / Service</h2>

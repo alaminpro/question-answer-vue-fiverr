@@ -58,7 +58,7 @@
       </div>
     </div>
     <div class="contact__us text-center mt-4">
-      <button class="btn btn-success" v-b-modal="'my-modal'">Contact Us</button>
+      <button class="btn btn-success" v-b-modal="'my-modal'">Find me my investor</button>
       <button class="btn btn-secondary mt-2" @click="goBack">Go Back</button>
       <b-modal hide-footer size="lg" id="my-modal">
         <ContactUs :rating="rating" />
