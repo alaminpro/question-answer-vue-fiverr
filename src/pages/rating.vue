@@ -58,12 +58,12 @@ export default {
   },
   data() {
     return {
-      fundraising: false,
+      fundraising: true,
       company: false,
       market: false,
       service: false,
       management: false,
-      end: true,
+      end: false,
       data: {
         fundraising: {
           fundSelected: [],
