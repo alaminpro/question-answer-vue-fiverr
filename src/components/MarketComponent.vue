@@ -49,7 +49,7 @@
               </select>
             </div>
             <div class="form-check" v-if="checkAnswerSelectMulti(market.answer)">
-              <Select2MultipleControl v-model="selectMultiple" :options="selectMultiOption" />
+              <Select2MultipleControl v-model="selectMultiple" :options="selectMultiOption"  />
             </div>
           </ValidationProvider>
         </fieldset>
