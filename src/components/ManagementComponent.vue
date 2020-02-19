@@ -33,7 +33,7 @@
               <label
                 class="form-check-label radio-label"
                 :for="'answer_' + ans_index + '_' + management.id"
-              >{{ ans.title }}</label>
+              >{{ ans.title | capitalize }}</label>
             </div>
             <div class="form-check" v-if="checkAnswerSelect(management.answer)">
               <select
@@ -45,7 +45,7 @@
                   v-for="(ans, ans_index) in checkAnswerSelect(management.answer)"
                   :key="ans_index"
                   :value="ans.value + '_' + ans.title"
-                >{{ ans.title }}</option>
+                >{{ ans.title | capitalize }}</option>
               </select>
             </div>
           </ValidationProvider>
@@ -58,7 +58,7 @@
                 <label
                   class="form-check-label radio-label"
                   :for="'answer_' + ans_index + '_' + management.id"
-                >{{ ans.title }}</label>
+                >{{ ans.title | capitalize}}</label>
                 <input
                   type="number"
                   class="form-control ml-3 mt-1"

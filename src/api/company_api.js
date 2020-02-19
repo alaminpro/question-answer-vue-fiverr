@@ -56,19 +56,19 @@ export const company = [
         value: 64
       },
       {
-        title: "500 and 1 Million",
+        title: "500 and 1 million",
         value: 96
       },
       {
-        title: "1 Million to 3 Million",
+        title: "1 million to 3 million",
         value: 128
       },
       {
-        title: "3 Million to 30 Million",
+        title: "3 million to 30 million",
         value: 164
       },
       {
-        title: "More than 30 Million",
+        title: "More than 30 million",
         value: 200
       }
     ]
@@ -144,7 +144,8 @@ export const company = [
         title: "Over 5 years",
         value: 64
       }
-    ]
+    ],
+    dependancies: false
   },
   {
     id: 7,

@@ -33,7 +33,7 @@
               <label
                 class="form-check-label radio-label"
                 :for="'answer_' + ans_index + '_' + company.id"
-              >{{ ans.title }}</label>
+              >{{ ans.title | capitalize}}</label>
             </div>
             <div class="form-check" v-if="checkAnswerSelect(company.answer)">
               <select
@@ -45,7 +45,7 @@
                   v-for="(ans, ans_index) in checkAnswerSelect(company.answer)"
                   :key="ans_index"
                   :value="ans.value + '_' + ans.title"
-                >{{ ans.title }}</option>
+                >{{ ans.title | capitalize}}</option>
               </select>
             </div>
           </ValidationProvider>
@@ -58,7 +58,7 @@
                 <label
                   class="form-check-label radio-label"
                   :for="'answer_' + ans_index + '_' + company.id"
-                >{{ ans.title }}</label>
+                >{{ ans.title | capitalize }}</label>
                 <input
                   type="number"
                   class="form-control ml-3 mt-1"
@@ -126,7 +126,7 @@ export default {
   watch: {
     companyWatch(newVal) {
       let filterVal = newVal
-        .map(val => val.split("_").filter(e => (e === "yes" ? e : "")))
+        .map(val => val.split("_").filter(e => (e === "no" ? e : "")))
         .some(a => (a.length > 0 ? a : ""));
       this.senitizeData(filterVal);
     }

@@ -5,8 +5,7 @@
 .radio_legend {
   font-size: 20px;
   font-weight: bold;
-  color: #525252;
-  text-transform: capitalize;
+  color: #525252; 
 }
 
 input[type="radio"] {
@@ -39,8 +38,7 @@ input[type="radio"]+.radio-label:before {
 }
 
 .radio-label {
-  cursor: pointer;
-  text-transform: capitalize;
+  cursor: pointer; 
 }
 
 input[type="radio"]:checked+.radio-label:before {

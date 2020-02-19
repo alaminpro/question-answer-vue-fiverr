@@ -85,7 +85,7 @@ export const market = [
         value: 16
       },
       {
-        title: "Real Estate",
+        title: "Real estate",
         value: 16
       },
       {
@@ -101,11 +101,11 @@ export const market = [
         value: 160
       },
       {
-        title: "Consumer Staples",
+        title: "Consumer staples",
         value: 64
       },
       {
-        title: "Health Care",
+        title: "Health care",
         value: 224
       },
       {
@@ -117,7 +117,7 @@ export const market = [
         value: 496
       },
       {
-        title: "communication Services",
+        title: "communication services",
         value: 144
       },
       {
@@ -125,11 +125,11 @@ export const market = [
         value: 16
       },
       {
-        title: "No Primary Industry Assigned",
+        title: "No primary industry Assigned",
         value: 160
       },
       {
-        title: "All Sectors",
+        title: "All sectors",
         value: 160
       }
     ]

@@ -16,7 +16,7 @@
         <div
           class="form-control-feedback"
           v-if="attemptSubmit && missingName"
-        >This Name field is required!</div>
+        >This name field is required!</div>
       </div>
 
       <!-- /form-group -->
@@ -35,20 +35,20 @@
         <div
           class="form-control-feedback"
           v-if="attemptSubmit && missingRole"
-        >This Role field is required!</div>
+        >This role field is required!</div>
       </div>
 
       <!-- /form-group -->
       <div class="form-group" v-bind:class="{ 'has-warning': attemptSubmit && missingPhone }">
         <label class="form-control-label" for="phone">
-          Phone Number
+          Phone number
           <span class="text-danger">*</span>
         </label>
         <VuePhoneNumberInput v-model="data.phone" />
         <div
           class="form-control-feedback"
           v-if="attemptSubmit && missingPhone"
-        >This Phone Number field is required!</div>
+        >This phone number field is required!</div>
       </div>
       <!-- /form-group -->
       <div class="form-group" v-bind:class="{ 'has-warning': attemptSubmit && missingEmail }">
@@ -72,7 +72,7 @@
       <!-- /form-group -->
       <div class="form-group" v-bind:class="{ 'has-warning': attemptSubmit && missingCompany }">
         <label class="form-control-label" for="company">
-          Company Name
+          Company name
           <span class="text-danger">*</span>
         </label>
         <input
@@ -85,11 +85,11 @@
         <div
           class="form-control-feedback"
           v-if="attemptSubmit && missingCompany"
-        >This Company Name field is required!</div>
+        >This company came field is required!</div>
       </div>
       <!-- /form-group -->
       <div class="form-group">
-        <label class="form-control-label" for="url">Company Website</label>
+        <label class="form-control-label" for="url">Company website</label>
         <input id="url" name="url" class="form-control" type="url" v-model="data.company_url" />
       </div>
       <!-- /form-group -->
@@ -109,7 +109,7 @@
       <div class="d-flex justify-content-between align-items-center">
         <div class="d-flex">
           <button type="submit" class="btn btn-primary" v-if="!success && !error">
-            Send Message
+            Send message
             <img
               v-if="loader"
               src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
@@ -121,7 +121,7 @@
             class="btn btn-success"
             v-if="success || error"
           >Go Back</button>
-          <div class="alert alert-success m-0 ml-5" v-if="success">Email Send Successfull!</div>
+          <div class="alert alert-success m-0 ml-5" v-if="success">Email send successfull!</div>
           <div class="alert alert-danger m-0 ml-5" v-if="error">Something went wrong!</div>
         </div>
         <div class="d-flex">
@@ -138,7 +138,7 @@
             />
           </div>
           <div class="text__upload">
-            <h3 class="m-0">Upload Business Model</h3>
+            <h3 class="m-0">Upload business model</h3>
             <p class="m-0">5MB Max- PDF, Doc, Docx, JPG</p>
           </div>
         </div>

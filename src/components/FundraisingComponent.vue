@@ -10,7 +10,7 @@
             v-slot="{ errors }"
           >
             <legend class="col-form-labelpt-0 radio_legend">
-              {{ fund.question }}
+              {{ fund.question | capitalize }}
               <span class="text-danger prems_custom_error">
                 {{
                 errors[0]? ' *' : ''
@@ -33,7 +33,7 @@
               <label
                 class="form-check-label radio-label"
                 :for="'answer_' + ans_index + '_' + fund.id"
-              >{{ ans.title }}</label>
+              >{{ ans.title | capitalize }}</label>
             </div>
             <div class="form-check" v-if="checkAnswerSelect(fund.answer)">
               <select
@@ -45,7 +45,7 @@
                   v-for="(ans, ans_index) in checkAnswerSelect(fund.answer)"
                   :key="ans_index"
                   :value="ans.value + '_' + ans.title"
-                >{{ ans.title }}</option>
+                >{{ ans.title | capitalize }}</option>
               </select>
             </div>
           </ValidationProvider>

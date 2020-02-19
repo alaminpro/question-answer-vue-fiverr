@@ -20,7 +20,7 @@ export const management = [
         value: 0
       },
       {
-        title: "More Than 4",
+        title: "More than 4",
         value: 0
       }
     ]

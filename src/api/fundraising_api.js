@@ -26,11 +26,11 @@ export const fundraising = [
         value: 32
       },
       {
-        title: "1 Million to 5 Million",
+        title: "1 million to 5 million",
         value: 64
       },
       {
-        title: "5 Million to 30 Million",
+        title: "5 million to 30 million",
         value: 82
       },
       {
@@ -102,19 +102,19 @@ export const fundraising = [
         value: 164
       },
       {
-        title: "500 and 1 Million",
+        title: "500 and 1 million",
         value: 128
       },
       {
-        title: "1 Million and 5 Million",
+        title: "1 million and 5 million",
         value: 96
       },
       {
-        title: "5 Million to 30 Million",
+        title: "5 million to 30 million",
         value: 64
       },
       {
-        title: "More than 30 Million ",
+        title: "More than 30 million ",
         value: 32
       }
     ]
