@@ -138,7 +138,7 @@
             />
           </div>
           <div class="text__upload">
-            <h3 class="m-0">Telecharger & RFP</h3>
+            <h3 class="m-0">Upload Business Model</h3>
             <p class="m-0">5MB Max- PDF, Doc, Docx, JPG</p>
           </div>
         </div>
