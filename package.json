@@ -18,10 +18,13 @@
     "cors": "^2.8.5",
     "easy-circular-progress": "^1.0.4",
     "express": "^4.17.1",
+    "fs-extra": "^8.1.0",
+    "multer": "^1.4.2",
     "nodemailer": "^6.4.2",
     "nodemon": "^2.0.2",
     "v-select2-component": "^0.4.1",
     "v-select2-multiple-component": "^0.1.1",
+    "vee-validate": "2.2.15",
     "vue": "^2.6.11",
     "vue-phone-number-input": "^1.1.6"
   },

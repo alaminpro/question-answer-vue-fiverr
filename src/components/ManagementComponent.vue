@@ -1,99 +1,95 @@
 <template>
   <div>
-    <fieldset
-      class="form-group"
-      v-for="(management, index) in managementActive"
-      :key="index"
-    >
-      <legend
-        class="col-form-labelpt-0 radio_legend"
-        v-html="management.question"
-      ></legend>
-      <div
-        class="form-check"
-        v-for="(ans, ans_index) in checkAnswerRadio(management.answer)"
-        :key="ans_index"
-      >
-        <input
-          class="form-check-input"
-          type="radio"
-          :name="'answer_' + management.id"
-          v-model="managementSelected[management.id]"
-          :id="'answer_' + ans_index + '_' + management.id"
-          :value="ans.value + '_' + ans.title"
-        />
-        <label
-          class="form-check-label radio-label"
-          :for="'answer_' + ans_index + '_' + management.id"
-        >
-          {{ ans.title }}
-        </label>
-      </div>
-      <div class="form-check" v-if="checkAnswerSelect(management.answer)">
-        <select
-          class="custom-select"
-          v-model="managementSelected[management.id]"
-          :name="'answer_' + management.id"
-        >
-          <option
-            v-for="(ans, ans_index) in checkAnswerSelect(management.answer)"
-            :key="ans_index"
-            :value="ans.value + '_' + ans.title"
+    <form @submit.prevent="Next()">
+      <ValidationObserver ref="form">
+        <fieldset class="form-group" v-for="(management, index) in managementActive" :key="index">
+          <ValidationProvider
+            name="'answer"
+            :vid="'answer_' + management.id"
+            rules="required"
+            v-slot="{ errors }"
           >
-            {{ ans.title }}</option
-          >
-        </select>
-      </div>
-    </fieldset>
-    <div>
-      <fieldset
-      class="form-group"
-      v-for="(management, index) in managementInput"
-      :key="index"
-    >
-      <legend
-        class="col-form-labelpt-0 radio_legend"
-        v-html="management.question"
-      ></legend>
-      <div
-        class="form-check"
-        v-for="(ans, ans_index) in management.answer"
-        :key="ans_index"
-      > 
-        <div class="input-group">
-          <label
-          class="form-check-label radio-label"
-          :for="'answer_' + ans_index + '_' + management.id"
-        >
-          {{ ans.title }}
-        </label>
-        <input type="number" class="form-control ml-3 mt-1" id="'answer_' + ans_index + '_' + management.id">
+            <legend class="col-form-labelpt-0 radio_legend">
+              <span v-html="management.question" class="d-flex"></span>
+              <span class="text-danger prems_custom_error">
+                {{
+                errors[0]? ' *' : ''
+                }}
+              </span>
+            </legend>
+            <div
+              class="form-check"
+              v-for="(ans, ans_index) in checkAnswerRadio(management.answer)"
+              :key="ans_index"
+            >
+              <input
+                class="form-check-input"
+                type="radio"
+                :name="'answer_' + management.id"
+                v-model="managementSelected[management.id]"
+                :id="'answer_' + ans_index + '_' + management.id"
+                :value="ans.value + '_' + ans.title"
+              />
+              <label
+                class="form-check-label radio-label"
+                :for="'answer_' + ans_index + '_' + management.id"
+              >{{ ans.title }}</label>
+            </div>
+            <div class="form-check" v-if="checkAnswerSelect(management.answer)">
+              <select
+                class="custom-select"
+                v-model="managementSelected[management.id]"
+                :name="'answer_' + management.id"
+              >
+                <option
+                  v-for="(ans, ans_index) in checkAnswerSelect(management.answer)"
+                  :key="ans_index"
+                  :value="ans.value + '_' + ans.title"
+                >{{ ans.title }}</option>
+              </select>
+            </div>
+          </ValidationProvider>
+        </fieldset>
+        <div>
+          <fieldset class="form-group" v-for="(management, index) in managementInput" :key="index">
+            <legend class="col-form-labelpt-0 radio_legend" v-html="management.question"></legend>
+            <div class="form-check" v-for="(ans, ans_index) in management.answer" :key="ans_index">
+              <div class="input-group">
+                <label
+                  class="form-check-label radio-label"
+                  :for="'answer_' + ans_index + '_' + management.id"
+                >{{ ans.title }}</label>
+                <input
+                  type="number"
+                  class="form-control ml-3 mt-1"
+                  id="'answer_' + ans_index + '_' + management.id"
+                />
+              </div>
+            </div>
+          </fieldset>
         </div>
-      </div>
-    </fieldset>
-    </div> 
-    <div class="next_section mt-5">
-      <button
-        type="button"
-        :disabled="managementBool"
-        class="btn btn-success"
-        @click="Next"
-      >
-        Next
-      </button>
-    </div>
+        <div class="next_section mt-5">
+          <button type="submit" class="btn btn-success">Next</button>
+        </div>
+      </ValidationObserver>
+    </form>
   </div>
 </template>
 
 <script>
-import { management } from "../api/management_api"; 
+import { management } from "../api/management_api";
+import { ValidationProvider, ValidationObserver } from "vee-validate";
 export default {
-  name: "managementComponent", 
+  name: "managementComponent",
+  components: {
+    ValidationProvider,
+    ValidationObserver
+  },
   data() {
     return {
       management: management,
       managementBool: true,
-      managementSelected: [], 
+      managementSelected: []
     };
   },
   computed: {
@@ -104,7 +100,7 @@ export default {
     },
     managementInput: function() {
       return this.management.filter(function(val) {
-        return  val.input === true;
+        return val.input === true;
       });
     },
     managementWatch: function() {
@@ -123,12 +119,6 @@ export default {
         .map(val => val.split("_").filter(e => (e === "yes" ? e : "")))
         .some(a => (a.length > 0 ? a : ""));
       this.senitizeData(filterVal);
-        const fund = this.managementSelected.filter(item => item !== undefined && item !== null)
-      if (fund.length >= 5) {
-        this.managementBool = false;
-      }
-
-      // window.console.log(managementMap)
     }
   },
   methods: {
@@ -142,17 +132,28 @@ export default {
           );
     },
     Next() {
-      const managementMap = this.managementSelected
-        .filter(el => el != null)
-        .map(val => Number(val.split("_")[0]));
+      this.$refs.form.validate().then(result => {
+        if (result) {
+          const managementMap = this.managementSelected
+            .filter(el => el != null)
+            .map(val => Number(val.split("_")[0]));
 
-      let managementMax = this.management.map(val => Math.max(...val.answer.map(v => v.value)))
-        .reduce((a, b) => a + b);
-      let managementMin = this.management.map(val => Math.min(...val.answer.map(v => v.value)))
-        .reduce((a, b) => a + b);
+          let managementMax = this.management
+            .map(val => Math.max(...val.answer.map(v => v.value)))
+            .reduce((a, b) => a + b);
+          let managementMin = this.management
+            .map(val => Math.min(...val.answer.map(v => v.value)))
+            .reduce((a, b) => a + b);
 
-      this.$emit("managementNext", { managementMap, managementMax, managementMin });
+          this.$emit("managementNext", {
+            managementMap,
+            managementMax,
+            managementMin
+          });
+          return;
+        }
+      });
     }
-  }, 
+  }
 };
 </script>

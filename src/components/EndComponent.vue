@@ -7,7 +7,7 @@
       <div class="rating_all">{{rating.overallRating}}</div>
       <Progress strokeColor="#2f72f9" :strokeWidth="10" :radius="70" :value="allval.overallRating"></Progress>
     </div>
-    <div class="report__generate_time text-center my-4">
+    <div class="report__generate_time text-center my-3">
       Report Generated:
       <span class="font-weight-bold" v-html="Datetime"></span>
     </div>
@@ -57,11 +57,11 @@
         </div>
       </div>
     </div>
-    <div class="contact__us text-center mt-5">
+    <div class="contact__us text-center mt-4">
       <button class="btn btn-success" v-b-modal="'my-modal'">Contact Us</button>
-      <button class="btn btn-secondary ml-2" @click="goBack">Go Back</button>
+      <button class="btn btn-secondary mt-2" @click="goBack">Go Back</button>
       <b-modal hide-footer size="lg" id="my-modal">
-        <ContactUs />
+        <ContactUs :rating="rating" />
       </b-modal>
     </div>
   </div>

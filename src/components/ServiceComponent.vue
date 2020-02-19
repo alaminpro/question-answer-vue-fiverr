@@ -1,83 +1,90 @@
 <template>
   <div>
-    <fieldset
-      class="form-group"
-      v-for="(service, index) in serviceActive"
-      :key="index"
-    >
-      <legend
-        class="col-form-labelpt-0 radio_legend"
-        v-html="service.question"
-      ></legend>
-      <div
-        class="form-check"
-        v-for="(ans, ans_index) in checkAnswerRadio(service.answer)"
-        :key="ans_index"
-      >
-        <input
-          class="form-check-input"
-          type="radio"
-          :name="'answer_' + service.id"
-          v-model="serviceSelected[service.id]"
-          :id="'answer_' + ans_index + '_' + service.id"
-          :value="ans.value + '_' + ans.title"
-        />
-        <label
-          class="form-check-label radio-label"
-          :for="'answer_' + ans_index + '_' + service.id"
-        >
-          {{ ans.title }}
-        </label>
-      </div>
-      <div class="form-check" v-if="checkAnswerSelect(service.answer)">
-        <select
-          class="custom-select"
-          v-model="serviceSelected[service.id]"
-          :name="'answer_' + service.id"
-        >
-          <option
-            v-for="(ans, ans_index) in checkAnswerSelect(service.answer)"
-            :key="ans_index"
-            :value="ans.value + '_' + ans.title"
+    <form @submit.prevent="Next()">
+      <ValidationObserver ref="form">
+        <fieldset class="form-group" v-for="(service, index) in serviceActive" :key="index">
+          <ValidationProvider
+            name="'answer"
+            :vid="'answer_' + service.id"
+            rules="required"
+            v-slot="{ errors }"
           >
-            {{ ans.title }}</option
-          >
-        </select>
-      </div>
-    </fieldset>
-    <div>
-     
-    </div> 
-    <div class="next_section mt-5">
-      <button
-        type="button"
-        :disabled="serviceBool"
-        class="btn btn-success"
-        @click="Next"
-      >
-        Next
-      </button>
-    </div>
+            <legend class="col-form-labelpt-0 radio_legend">
+              <span v-html="service.question" class="d-flex"></span>
+              <span class="text-danger prems_custom_error">
+                {{
+                errors[0]? ' *' : ''
+                }}
+              </span>
+            </legend>
+            <div
+              class="form-check"
+              v-for="(ans, ans_index) in checkAnswerRadio(service.answer)"
+              :key="ans_index"
+            >
+              <input
+                class="form-check-input"
+                type="radio"
+                :name="'answer_' + service.id"
+                v-model="serviceSelected[service.id]"
+                :id="'answer_' + ans_index + '_' + service.id"
+                :value="ans.value + '_' + ans.title"
+              />
+              <label
+                class="form-check-label radio-label"
+                :for="'answer_' + ans_index + '_' + service.id"
+              >{{ ans.title }}</label>
+            </div>
+            <div class="form-check" v-if="checkAnswerSelect(service.answer)">
+              <select
+                class="custom-select"
+                v-model="serviceSelected[service.id]"
+                :name="'answer_' + service.id"
+              >
+                <option
+                  v-for="(ans, ans_index) in checkAnswerSelect(service.answer)"
+                  :key="ans_index"
+                  :value="ans.value + '_' + ans.title"
+                >{{ ans.title }}</option>
+              </select>
+            </div>
+          </ValidationProvider>
+        </fieldset>
+        <div></div>
+        <div class="next_section mt-5">
+          <button type="submit" class="btn btn-success">Next</button>
+        </div>
+      </ValidationObserver>
+    </form>
   </div>
 </template>
 
 <script>
-import { service } from "../api/service_api"; 
+import { service } from "../api/service_api";
+import { ValidationProvider, ValidationObserver } from "vee-validate";
 export default {
-  name: "serviceComponent", 
+  name: "serviceComponent",
+  components: {
+    ValidationProvider,
+    ValidationObserver
+  },
   data() {
     return {
       service: service,
       serviceBool: true,
-      serviceSelected: [],  
+      serviceSelected: []
     };
   },
   computed: {
     serviceActive: function() {
       return this.service.filter(function(val) {
-        return val.dependancies !== false && val.input !== true && val.dependbeing !== false;
+        return (
+          val.dependancies !== false &&
+          val.input !== true &&
+          val.dependbeing !== false
+        );
       });
-    }, 
+    },
     serviceWatch: function() {
       return this.serviceSelected;
     },
@@ -92,17 +99,13 @@ export default {
     serviceWatch(newVal) {
       let filterVal = newVal
         .map(val => val.split("_").filter(e => (e === "yes" ? e : "")))
-        .some(a => (a.length > 0 ? a : "")); 
+        .some(a => (a.length > 0 ? a : ""));
       let filterbeing = newVal
-        .map(val => val.split("_")
-        .filter(e => ( e === "being built" ? e : "")))
-        .some(a => (a.length > 0 ? a : "")); 
+        .map(val => val.split("_").filter(e => (e === "being built" ? e : "")))
+        .some(a => (a.length > 0 ? a : ""));
       this.senitizeData(filterVal);
       this.senitizeDataBeing(filterbeing);
-       const fund = this.serviceSelected.filter(item => item !== undefined && item !== null)
-      if (fund.length >= 5) {
-        this.serviceBool = false;
-      }
+ 
     }
   },
   methods: {
@@ -125,19 +128,26 @@ export default {
           );
     },
     Next() {
-      const serviceMap = this.serviceSelected
-        .filter(el => el != null)
-        .map(val => Number(val.split("_")[0]));
+      this.$refs.form.validate().then(result => {
+        if (result) {
+          const serviceMap = this.serviceSelected
+            .filter(el => el != null)
+            .map(val => Number(val.split("_")[0]));
 
-      let serviceMax = this.service.filter(d => d.dependancies !== false || d.dependbeing !== false)
-        .map(val => Math.max(...val.answer.map(v => v.value)))
-        .reduce((a, b) => a + b);
-      let serviceMin = this.service.filter(d => d.dependancies !== false || d.dependbeing !== false)
-        .map(val => Math.min(...val.answer.map(v => v.value)))
-        .reduce((a, b) => a + b);
+          let serviceMax = this.service
+            .filter(d => d.dependancies !== false || d.dependbeing !== false)
+            .map(val => Math.max(...val.answer.map(v => v.value)))
+            .reduce((a, b) => a + b);
+          let serviceMin = this.service
+            .filter(d => d.dependancies !== false || d.dependbeing !== false)
+            .map(val => Math.min(...val.answer.map(v => v.value)))
+            .reduce((a, b) => a + b);
 
-      this.$emit("serviceNext", { serviceMap, serviceMax, serviceMin });
+          this.$emit("serviceNext", { serviceMap, serviceMax, serviceMin });
+          return;
+        }
+      });
     }
-  },  
+  }
 };
 </script>
