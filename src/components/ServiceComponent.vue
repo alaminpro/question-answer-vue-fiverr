@@ -53,6 +53,10 @@
         <div></div>
         <div class="next_section mt-5">
           <button type="submit" class="btn btn-custom-bg">Next</button>
+          <span
+            v-if="error"
+            class="pl-3 text-danger"
+          >You have not selected some input. please select!</span>
         </div>
       </ValidationObserver>
     </form>
@@ -72,7 +76,8 @@ export default {
     return {
       service: service,
       serviceBool: true,
-      serviceSelected: []
+      serviceSelected: [],
+      error: false
     };
   },
   computed: {
@@ -105,7 +110,6 @@ export default {
         .some(a => (a.length > 0 ? a : ""));
       this.senitizeData(filterVal);
       this.senitizeDataBeing(filterbeing);
- 
     }
   },
   methods: {
@@ -128,8 +132,11 @@ export default {
           );
     },
     Next() {
+      this.error = true;
       this.$refs.form.validate().then(result => {
         if (result) {
+          this.error = false;
+          window.scrollTo(0, 0);
           const serviceMap = this.serviceSelected
             .filter(el => el != null)
             .map(val => Number(val.split("_")[0]));

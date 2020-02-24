@@ -53,6 +53,10 @@
 
         <div class="next_section">
           <button type="submit" class="btn btn-custom-bg">Next</button>
+          <span
+            v-if="error"
+            class="pl-3 text-danger"
+          >You have not selected some input. please select!</span>
         </div>
       </ValidationObserver>
     </form>
@@ -62,7 +66,6 @@
 import { fundraising } from "../api/fundraising_api";
 import { ValidationProvider, ValidationObserver } from "vee-validate";
 export default {
-
   name: "FundraisingComponent",
   components: {
     ValidationProvider,
@@ -71,7 +74,8 @@ export default {
   data() {
     return {
       Fundraisings: fundraising,
-      fundraisingSelected: []
+      fundraisingSelected: [],
+      error: false
     };
   },
   computed: {
@@ -109,8 +113,11 @@ export default {
           );
     },
     Next() {
+      this.error = true;
       this.$refs.form.validate().then(result => {
         if (result) {
+          this.error = false;
+          window.scrollTo(0, 0);
           const fundraisingMap = this.fundraisingSelected
             .filter(el => el != null)
             .map(val => Number(val.split("_")[0]));

@@ -7,7 +7,8 @@
   >
     <div class="container">
       <router-link to="/" class="navbar-brand" active-class="is__active"
-        >Business</router-link
+        >INVESTORS RATING
+</router-link
       >
       <button
         class="navbar-toggler navbar-toggler-right"

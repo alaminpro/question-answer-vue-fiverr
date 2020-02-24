@@ -139,6 +139,10 @@ export const market = [
     question: "Secondary Industry (Multiple Choice)",
     answer: [
       {
+        title: "All sectors",
+        value: 0
+      },
+      {
         title: "Aerospace and Defense",
         value: 0
       },
@@ -414,10 +418,6 @@ export const market = [
         title: "Wireless Telecommunication Services",
         value: 0
       },
-      {
-        title: "All sectors",
-        value: 0
-      }
     ],
     multiple: true
   }

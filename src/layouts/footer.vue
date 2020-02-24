@@ -2,9 +2,13 @@
   <!-- Footer -->
   <footer class="footer_background py-5">
     <div class="container">
-      <div class="small text-center text-light">
-        Copyright &copy; 2019 - Start Bootstrap
+      <div class="notice-terms d-flex justify-content-center mb-3">
+        <router-link to="/legal-notice" class="mr-2 text-light">Legal Notice</router-link>
+        <router-link to="/terms-of-use" class="text-light">Terms of use</router-link>
       </div>
+      <div
+        class="small text-center text-light"
+      >Copyright © Ratings investor 2020 All Rights Reserved</div>
     </div>
   </footer>
 </template>
@@ -18,8 +22,8 @@ export default {
 };
 </script>
 <style lang="scss">
-  .footer_background{
-    background: #343a40;
-    color: white;
-  }
+.footer_background {
+  background: #343a40;
+  color: white;
+}
 </style>

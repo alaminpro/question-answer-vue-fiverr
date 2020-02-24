@@ -93,10 +93,15 @@
     </div>
     <hr>
     <div class="some_detail pt-3">
-        <p> - Whatever your rating is, we have investor interested in different types of projects having various sub rating scores</p>
-        <p>- The rating is based on a serie of questions and needs to be assessed by a member of our team to fully understand the scope. </p>
-        <p>- Depending on the sector, company profile, a higher or lower rating can be seen differently.</p>
-        <p class="pb-4"> - We aim to find also investors that can eventually bring some experience to help grow your business, so by accessing this way we can make sure we have the best suited investors for you. 
+        <p> - Ratings range from A+,A, B+,B,C+,C 
+</p>
+        <p>- Whatever your rating is, we have investor interested in different types of projects having various sub rating scores
+ </p>
+        <p>- The rating is based on a series of questions and needs to be assessed by a member of our team to fully understand the scope.</p>
+        <p class="pb-4"> - Depending on the sector, company profile, a higher or lower rating can be seen differently. 
+</p>
+        <p class="pb-4"> - We aim to find also investors that can eventually bring some experience to help grow your business, so by accessing this way we can make sure we have the best suited investors for you.
+ 
 </p>
   <div class="w-100 text-center">
       <router-link to="/rate-your-project" class="text-center mt-" style="color: #f4623a">Feel free to contact us! </router-link>

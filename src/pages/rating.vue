@@ -366,6 +366,9 @@ export default {
       else if (val >= 5507 && val <= 6705) return "A";
       else if (val >= 6706) return "A+";
     }
+  }, 
+   mounted() {
+    document.title = "Rate your project";
   }
 };
 </script>

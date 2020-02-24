@@ -49,12 +49,16 @@
               </select>
             </div>
             <div class="form-check" v-if="checkAnswerSelectMulti(market.answer)">
-              <Select2MultipleControl v-model="selectMultiple" :options="selectMultiOption"  />
+              <Select2MultipleControl v-model="selectMultiple" :options="selectMultiOption" />
             </div>
           </ValidationProvider>
         </fieldset>
         <div class="next_section mt-5">
           <button type="submit" class="btn btn-custom-bg">Next</button>
+          <span
+            v-if="error"
+            class="pl-3 text-danger"
+          >You have not selected some input. please select!</span>
         </div>
       </ValidationObserver>
     </form>
@@ -78,7 +82,8 @@ export default {
       marketBool: true,
       marketSelected: [],
       selectMultiple: [],
-      selectMultiOption: []
+      selectMultiOption: [],
+      error: false
     };
   },
   computed: {
@@ -106,7 +111,6 @@ export default {
         .map(val => val.split("_").filter(e => (e === "yes" ? e : "")))
         .some(a => (a.length > 0 ? a : ""));
       this.senitizeData(filterVal);
-   
     }
   },
   methods: {
@@ -120,8 +124,11 @@ export default {
           );
     },
     Next() {
+      this.error = true;
       this.$refs.form.validate().then(result => {
         if (result) {
+          this.error = false;
+          window.scrollTo(0, 0);
           const marketMapEdit = this.marketSelected
             .filter(el => el != null)
             .map(val => Number(val.split("_")[0]));
