@@ -62,7 +62,7 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-8 text-center">
-            <h2 class="text-white mt-0">RATE YOUR PROJECT </h2>
+            <h2 class="text-white mt-0">Rate you project! </h2>
             <hr class="divider light my-4" />
             <router-link
               to="/rate-your-project"
@@ -148,7 +148,9 @@ export default {
   },
   methods: {
   aboutSection(){
-     window.scrollTo(0, 650); 
+    var element = document.querySelector('.masthead'); 
+    var height = element.offsetHeight; 
+    window.scrollTo(0, height);  
   }
   },
   mounted() {
